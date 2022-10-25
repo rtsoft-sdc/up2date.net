@@ -6,7 +6,7 @@
     <title>up2date.net</title>
     <authors>RTSoft</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">MIT</license>
+    <license type="expression">Apache-2.0</license>
 	<repository type="git" url="https://github.com/rtsoft-gmbh/up2date.net.git"/>
 	<description>Serves as API wrapper for building .Net RITMS UP2DATE client</description>
     <releaseNotes>First public release.</releaseNotes>
