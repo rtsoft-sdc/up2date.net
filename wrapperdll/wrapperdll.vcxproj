@@ -86,7 +86,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <NMakeBuildCommandLine>build.bat $(Configuration) $(SolutionDir)bin\$(Configuration)\</NMakeBuildCommandLine>
-    <NMakeOutput>wrapperdll.dll</NMakeOutput>
+    <NMakeOutput>
+    </NMakeOutput>
     <NMakeCleanCommandLine>RMDIR /S /Q build_$(PlatformShortName)</NMakeCleanCommandLine>
     <NMakeReBuildCommandLine>build.bat $(Configuration) $(SolutionDir)bin\$(Configuration)\</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
@@ -96,7 +97,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <NMakeBuildCommandLine>build.bat $(Configuration) $(SolutionDir)bin\$(Configuration)\</NMakeBuildCommandLine>
-    <NMakeOutput>wrapperdll.dll</NMakeOutput>
+    <NMakeOutput>
+    </NMakeOutput>
     <NMakeCleanCommandLine>RMDIR /S /Q build_$(PlatformShortName)</NMakeCleanCommandLine>
     <NMakeReBuildCommandLine>build.bat $(Configuration) $(SolutionDir)bin\$(Configuration)\</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
