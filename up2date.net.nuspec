@@ -12,16 +12,16 @@
     <releaseNotes>First public release.</releaseNotes>
     <copyright>Copyright ©RTSoft  2022</copyright>
     <tags>RITMS UP2DATE</tags>
-	<dependencies>
+    <dependencies>
       <group targetFramework=".NETFramework4.7.2" />
-	</dependencies>
+    </dependencies>
     <contentFiles>
       <files include="**/*.*" buildAction="Content" copyToOutput="true"/>
     </contentFiles>
   </metadata>
   <files>
-	<file src="bin\Release\Up2dateDotNet.dll" target="lib\net472"/>
-	<file src="bin\Release\wrapperdll-x64.dll" target="contentFiles\any\any"/>
+    <file src="bin\Release\Up2dateDotNet.dll" target="lib\net472"/>
+    <file src="bin\Release\wrapperdll-x64.dll" target="contentFiles\any\any"/>
     <file src="bin\Release\wrapperdll-x86.dll" target="contentFiles\any\any"/>
   </files>
 </package>
