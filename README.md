@@ -12,6 +12,6 @@ This client library is a reference implementation of RITMS UP2DATE API for .NET 
 
 ## SEE ALSO:
 
-* [UP2DATE for Winfows](https://github.com/rtsoft-gmbh/up2date-win/)
+* [UP2DATE for Windows](https://github.com/rtsoft-gmbh/up2date-win/)
 * [UP2DATE C++](https://github.com/rtsoft-gmbh/up2date-cpp/)
 
