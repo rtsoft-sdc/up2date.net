@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata>
-    <id>up2date.net</id>
-    <version>1.0.0</version>
+    <id>rtsoft.ritms.up2date.net</id>
+    <version>1.0.0-alpha</version>
     <title>up2date.net</title>
     <authors>RTSoft</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">Apache-2.0</license>
+    <icon>Ritms.png</icon>
+    <projectUrl>https://up2date.ritms.online</projectUrl>
     <repository type="git" url="https://github.com/rtsoft-gmbh/up2date.net.git"/>
-    <description>Serves as API wrapper for building .Net RITMS UP2DATE client</description>
+    <description>This library provides .NET API for building managed RITMS UP2DATE client</description>
     <releaseNotes>First public release.</releaseNotes>
-    <copyright>Copyright ©RTSoft  2022</copyright>
+    <copyright>Copyright © RTSoft GmbH 2022</copyright>
     <tags>RITMS UP2DATE</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.7.2" />
@@ -23,5 +25,6 @@
     <file src="bin\Release\Up2dateDotNet.dll" target="lib\net472"/>
     <file src="bin\Release\wrapperdll-x64.dll" target="contentFiles\any\any"/>
     <file src="bin\Release\wrapperdll-x86.dll" target="contentFiles\any\any"/>
+    <file src="Ritms.png" target=""/>
   </files>
 </package>
