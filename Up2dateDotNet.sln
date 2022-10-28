@@ -3,16 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Up2dateDotNet", "Up2dateDotNet\Up2dateDotNet.csproj", "{45020024-180D-45B4-A4C9-61F55825B75B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wrapperdll", "wrapperdll\wrapperdll.vcxproj", "{2ECBFB4B-5593-40C9-BB44-6FA3C8AB858F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientExample", "ClientExample\ClientExample.csproj", "{A34A56E5-CC27-4A97-9F4E-DE4175E6E00A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1FD5EFC5-359C-43AB-8C1D-0B63387AA926} = {1FD5EFC5-359C-43AB-8C1D-0B63387AA926}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{223942EC-8887-4484-9CF0-393D50B79145}"
-	ProjectSection(SolutionItems) = preProject
-		Ritms.png = Ritms.png
-		up2date.net.nuspec = up2date.net.nuspec
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Up2dateDotNet", "Up2dateDotNet\Up2dateDotNet.csproj", "{1FD5EFC5-359C-43AB-8C1D-0B63387AA926}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2ECBFB4B-5593-40C9-BB44-6FA3C8AB858F} = {2ECBFB4B-5593-40C9-BB44-6FA3C8AB858F}
 	EndProjectSection
 EndProject
 Global
@@ -21,18 +23,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{45020024-180D-45B4-A4C9-61F55825B75B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45020024-180D-45B4-A4C9-61F55825B75B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45020024-180D-45B4-A4C9-61F55825B75B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45020024-180D-45B4-A4C9-61F55825B75B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2ECBFB4B-5593-40C9-BB44-6FA3C8AB858F}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{2ECBFB4B-5593-40C9-BB44-6FA3C8AB858F}.Debug|Any CPU.Build.0 = Debug|x64
-		{2ECBFB4B-5593-40C9-BB44-6FA3C8AB858F}.Release|Any CPU.ActiveCfg = Release|Win32
-		{2ECBFB4B-5593-40C9-BB44-6FA3C8AB858F}.Release|Any CPU.Build.0 = Release|Win32
+		{2ECBFB4B-5593-40C9-BB44-6FA3C8AB858F}.Release|Any CPU.ActiveCfg = Release|x64
+		{2ECBFB4B-5593-40C9-BB44-6FA3C8AB858F}.Release|Any CPU.Build.0 = Release|x64
 		{A34A56E5-CC27-4A97-9F4E-DE4175E6E00A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A34A56E5-CC27-4A97-9F4E-DE4175E6E00A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A34A56E5-CC27-4A97-9F4E-DE4175E6E00A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A34A56E5-CC27-4A97-9F4E-DE4175E6E00A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FD5EFC5-359C-43AB-8C1D-0B63387AA926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD5EFC5-359C-43AB-8C1D-0B63387AA926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD5EFC5-359C-43AB-8C1D-0B63387AA926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD5EFC5-359C-43AB-8C1D-0B63387AA926}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

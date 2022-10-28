@@ -1,5 +1,5 @@
 ﻿set OutDirectory=%2
-echo OutDir = %OutDirectory%
+mkdir "%OutDirectory%"
 
 RMDIR /S /Q build_x86
 mkdir build_x86
