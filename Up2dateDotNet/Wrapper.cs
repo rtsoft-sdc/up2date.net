@@ -59,6 +59,30 @@ namespace Up2dateDotNet
                 Wrapper64.RunClient(clientCertificate, provisioningEndpoint, xApigToken, dispatcher, onAuthErrorAction);
             }
         }
+
+        public void RunClientWithDeviceToken(string deviceToken, string hawkbitEndpoint, string controllerId, string tenant, IntPtr dispatcher)
+        {
+            if (IntPtr.Size == 4)
+            {
+                Wrapper32.RunClientWithDeviceToken(deviceToken, hawkbitEndpoint, controllerId, tenant, dispatcher);
+            }
+            else
+            {
+                Wrapper64.RunClientWithDeviceToken(deviceToken, hawkbitEndpoint, controllerId, tenant, dispatcher);
+            }
+        }
+
+        public void RunClientWithGatewayToken(string gatewayToken, string hawkbitEndpoint, string controllerId, string tenant, IntPtr dispatcher)
+        {
+            if (IntPtr.Size == 4)
+            {
+                Wrapper32.RunClientWithGatewayToken(gatewayToken, hawkbitEndpoint, controllerId, tenant, dispatcher);
+            }
+            else
+            {
+                Wrapper64.RunClientWithGatewayToken(gatewayToken, hawkbitEndpoint, controllerId, tenant, dispatcher);
+            }
+        }
     }
 
     static class Wrapper64
@@ -77,6 +101,12 @@ namespace Up2dateDotNet
 
         [DllImport(@"wrapperdll-x64.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void RunClient(string clientCertificate, string provisioningEndpoint, string xApigToken, IntPtr dispatcher, AuthErrorActionFunc onAuthErrorAction);
+
+        [DllImport(@"wrapperdll-x64.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RunClientWithDeviceToken(string deviceToken, string hawkbitEndpoint, string controllerId, string tenant, IntPtr dispatcher);
+
+        [DllImport(@"wrapperdll-x64.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RunClientWithGatewayToken(string gatewayToken, string hawkbitEndpoint, string controllerId, string tenant, IntPtr dispatcher);
     }
 
     static class Wrapper32
@@ -95,6 +125,12 @@ namespace Up2dateDotNet
 
         [DllImport(@"wrapperdll-x86.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void RunClient(string clientCertificate, string provisioningEndpoint, string xApigToken, IntPtr dispatcher, AuthErrorActionFunc onAuthErrorAction);
+
+        [DllImport(@"wrapperdll-x86.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RunClientWithDeviceToken(string deviceToken, string hawkbitEndpoint, string controllerId, string tenant, IntPtr dispatcher);
+
+        [DllImport(@"wrapperdll-x86.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RunClientWithGatewayToken(string gatewayToken, string hawkbitEndpoint, string controllerId, string tenant, IntPtr dispatcher);
     }
 
 }

@@ -40,7 +40,26 @@ namespace HkbClient {
             ->setEventHandler(std::shared_ptr<EventHandler>(dispatcher))
             ->build()
             ->run();
+    }
 
+    void RunClientWithDeviceToken(const char* deviceToken, const char* hawkbitEndpoint, const char* controllerId, const char* tenant, CallbackDispatcher* dispatcher) {
+        auto builder = DDIClientBuilder::newInstance();
+
+        builder->setHawkbitEndpoint(hawkbitEndpoint, controllerId, tenant)
+            ->setDeviceToken(deviceToken)
+            ->setEventHandler(std::shared_ptr<EventHandler>(dispatcher))
+            ->build()
+            ->run();
+    }
+
+    void RunClientWithGatewayToken(const char* gatewayToken, const char* hawkbitEndpoint, const char* controllerId, const char* tenant, CallbackDispatcher* dispatcher) {
+        auto builder = DDIClientBuilder::newInstance();
+
+        builder->setHawkbitEndpoint(hawkbitEndpoint, controllerId, tenant)
+            ->setGatewayToken(gatewayToken)
+            ->setEventHandler(std::shared_ptr<EventHandler>(dispatcher))
+            ->build()
+            ->run();
     }
 
     void DeleteDispatcher(CallbackDispatcher* dispatcher) {

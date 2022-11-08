@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.ConstrainedExecution;
 using Up2dateDotNet;
 
 namespace ClientExample
@@ -12,27 +13,41 @@ namespace ClientExample
 
         static void Main(string[] args)
         {
-            const string provisioningUrl = "https://dps.ritms.online/provisioning";
-            const string xApigToken = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-
-            if (args.Length < 1)
-            {
-                Console.WriteLine("Usage: ClientExample <certificate.cer>");
-                return;
-            }
-
-            var cert = File.ReadAllText(args[0]);
-            
             var dispatcher = wrapper.CreateDispatcher(onConfigRequest, onDeploymentAction, onCancelAction);
 
             Console.WriteLine("Client started");
 
-            wrapper.RunClient(cert, provisioningUrl, xApigToken, dispatcher, onAuthErrorAction);
-
-            Console.WriteLine("Client stopped");
-
+            if (args.Length < 1)
+            {
+                Console.WriteLine("Usage: ClientExample <provisioningUrl> <certificateFile>");
+                Console.WriteLine("   or: ClientExample <hawkbitUrl> <tenant> <controllerId> <token>");
+            }
+            else if (args.Length < 3)
+            {
+                RunClientWithCertificate(dispatcher, args[0], args[1]);
+                Console.WriteLine("Client stopped");
+            }
+            else
+            {
+                RunClientWithDeviceToken(dispatcher, args[0], args[1], args[2], args[2]);
+                Console.WriteLine("Client stopped");
+            }
 
             wrapper.DeleteDispatcher(dispatcher);
+        }
+
+        private static void RunClientWithDeviceToken(IntPtr dispatcher, string hawkbitUrl, string tenant, string controlledId, string token)
+        {
+            wrapper.RunClientWithDeviceToken(token, hawkbitUrl, controlledId, tenant, dispatcher);
+        }
+
+        private static void RunClientWithCertificate(IntPtr dispatcher, string provisioningUrl, string certFile)
+        {
+            const string xApigToken = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+
+            var cert = File.ReadAllText(certFile);
+
+            wrapper.RunClient(cert, provisioningUrl, xApigToken, dispatcher, onAuthErrorAction);
         }
 
         private static void onAuthErrorAction(string errorMessage)

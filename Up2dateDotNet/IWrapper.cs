@@ -18,5 +18,9 @@ namespace Up2dateDotNet
         void AddConfigAttribute(IntPtr responseBuilder, string key, string value);
 
         void RunClient(string clientCertificate, string provisioningEndpoint, string xApigToken, IntPtr dispatcher, AuthErrorActionFunc onAuthErrorAction);
+
+        void RunClientWithDeviceToken(string deviceToken, string hawkbitEndpoint, string controllerId, string tenant, IntPtr dispatcher);
+
+        void RunClientWithGatewayToken(string gatewayToken, string hawkbitEndpoint, string controllerId, string tenant, IntPtr dispatcher);
     }
 }
