@@ -29,7 +29,7 @@ namespace ClientExample
             }
             else
             {
-                RunClientWithDeviceToken(dispatcher, args[0], args[1], args[2], args[2]);
+                RunClientWithDeviceToken(dispatcher, args[0], args[1], args[2], args[3]);
                 Console.WriteLine("Client stopped");
             }
 
