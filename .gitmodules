@@ -1,4 +1,4 @@
 [submodule "wrapperdll/up2date-cpp"]
 	path = wrapperdll/up2date-cpp
 	url = https://github.com/rtsoft-gmbh/up2date-cpp.git
-	branch = v2.0.0
+	branch = v2.1.0

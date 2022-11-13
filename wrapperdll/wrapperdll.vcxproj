@@ -43,7 +43,7 @@
     <NMakeOutput>
     </NMakeOutput>
     <NMakeCleanCommandLine>RMDIR /S /Q $(ProjectDir)bin\$(Configuration)</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>build.bat $(Configuration) $(ProjectDir)bin\$(Configuration)\</NMakeReBuildCommandLine>
+    <NMakeReBuildCommandLine>build.bat $(Configuration) $(ProjectDir)bin\$(Configuration)\ rebuild</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)wrapperdll\up2date-cpp\ddi\include;$(SolutionDir)wrapperdll\up2date-cpp\dps\include</ExternalIncludePath>
     <NMakeIncludeSearchPath>$(SolutionDir)wrapperdll\up2date-cpp\dps\include;$(SolutionDir)wrapperdll\up2date-cpp\ddi\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
@@ -56,7 +56,7 @@
     <NMakeOutput>
     </NMakeOutput>
     <NMakeCleanCommandLine>RMDIR /S /Q $(ProjectDir)bin\$(Configuration)</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>build.bat $(Configuration) $(ProjectDir)bin\$(Configuration)\</NMakeReBuildCommandLine>
+    <NMakeReBuildCommandLine>build.bat $(Configuration) $(ProjectDir)bin\$(Configuration)\ rebuild</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <NMakeIncludeSearchPath>$(SolutionDir)wrapperdll\up2date-cpp\dps\include;$(SolutionDir)wrapperdll\up2date-cpp\ddi\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
     <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath);$(DevEnvDir)CommonExtensions\Microsoft\CMake\CMake\bin\</ExecutablePath>

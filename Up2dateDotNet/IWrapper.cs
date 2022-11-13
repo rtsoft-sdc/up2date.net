@@ -9,14 +9,30 @@ namespace Up2dateDotNet
 
     public interface IWrapper
     {
-        IntPtr CreateDispatcher(ConfigRequestFunc onConfigRequest, DeploymentActionFunc onDeploymentAction, CancelActionFunc onCancelAction);
-
-        void DeleteDispatcher(IntPtr dispatcher);
-
         void DownloadArtifact(IntPtr artifact, string location);
 
         void AddConfigAttribute(IntPtr responseBuilder, string key, string value);
 
-        void RunClient(string clientCertificate, string provisioningEndpoint, string xApigToken, IntPtr dispatcher, AuthErrorActionFunc onAuthErrorAction);
+        IntPtr BuildClient(string clientCertificate, string provisioningEndpoint, string xApigToken,
+            AuthErrorActionFunc onAuthErrorAction,
+            ConfigRequestFunc configRequest,
+            DeploymentActionFunc deploymentAction,
+            CancelActionFunc cancelAction);
+
+        IntPtr BuildClientWithDeviceToken(string deviceToken, string hawkbitEndpoint,
+            ConfigRequestFunc configRequest,
+            DeploymentActionFunc deploymentAction,
+            CancelActionFunc cancelAction);
+
+        IntPtr BuildClientWithGatewayToken(string gatewayToken, string hawkbitEndpoint,
+            ConfigRequestFunc configRequest,
+            DeploymentActionFunc deploymentAction,
+            CancelActionFunc cancelAction);
+
+        void Run(IntPtr client);
+
+        void Stop(IntPtr client);
+
+        void Delete(IntPtr client);
     }
 }

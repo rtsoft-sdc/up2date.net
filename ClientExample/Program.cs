@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using Up2dateDotNet;
 
@@ -12,27 +11,41 @@ namespace ClientExample
 
         static void Main(string[] args)
         {
-            const string provisioningUrl = "https://dps.ritms.online/provisioning";
-            const string xApigToken = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+            Console.WriteLine("Client started");
 
             if (args.Length < 1)
             {
-                Console.WriteLine("Usage: ClientExample <certificate.cer>");
-                return;
+                Console.WriteLine("Usage: ClientExample <provisioningUrl> <certificateFile>");
+                Console.WriteLine("   or: ClientExample <hawkbitUrl> <tenant> <controllerId> <token>");
             }
+            else if (args.Length < 3)
+            {
+                RunClientWithCertificate(args[0], args[1]);
+                Console.WriteLine("Client stopped");
+            }
+            else
+            {
+                RunClientWithDeviceToken(args[0], args[1], args[2]);
+                Console.WriteLine("Client stopped");
+            }
+        }
 
-            var cert = File.ReadAllText(args[0]);
-            
-            var dispatcher = wrapper.CreateDispatcher(onConfigRequest, onDeploymentAction, onCancelAction);
+        private static void RunClientWithDeviceToken(string hawkbitUrl, string controlledId, string token)
+        {
+            var client = wrapper.BuildClientWithDeviceToken(token, hawkbitUrl + "/" + controlledId, onConfigRequest, onDeploymentAction, onCancelAction);
+            wrapper.Run(client);
+            wrapper.Delete(client);
+        }
 
-            Console.WriteLine("Client started");
+        private static void RunClientWithCertificate(string provisioningUrl, string certFile)
+        {
+            const string xApigToken = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
-            wrapper.RunClient(cert, provisioningUrl, xApigToken, dispatcher, onAuthErrorAction);
+            var cert = File.ReadAllText(certFile);
 
-            Console.WriteLine("Client stopped");
-
-
-            wrapper.DeleteDispatcher(dispatcher);
+            var client = wrapper.BuildClient(cert, provisioningUrl, xApigToken, onAuthErrorAction, onConfigRequest, onDeploymentAction, onCancelAction);
+            wrapper.Run(client);
+            wrapper.Delete(client);
         }
 
         private static void onAuthErrorAction(string errorMessage)
