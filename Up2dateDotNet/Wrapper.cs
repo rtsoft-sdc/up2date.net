@@ -29,39 +29,60 @@ namespace Up2dateDotNet
             }
         }
 
-        public void RunClient(string clientCertificate, string provisioningEndpoint, string xApigToken, AuthErrorActionFunc onAuthErrorAction, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction)
+        public IntPtr BuildClient(string clientCertificate, string provisioningEndpoint, string xApigToken, AuthErrorActionFunc onAuthErrorAction, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction)
+        {
+            return (IntPtr.Size == 4)
+                ? Wrapper32.BuildClient(clientCertificate, provisioningEndpoint, xApigToken, onAuthErrorAction, configRequest, deploymentAction, cancelAction)
+                : Wrapper64.BuildClient(clientCertificate, provisioningEndpoint, xApigToken, onAuthErrorAction, configRequest, deploymentAction, cancelAction);
+        }
+
+        public IntPtr BuildClientWithDeviceToken(string deviceToken, string hawkbitEndpoint, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction)
+        {
+            return (IntPtr.Size == 4)
+                ? Wrapper32.BuildClientWithDeviceToken(deviceToken, hawkbitEndpoint, configRequest, deploymentAction, cancelAction)
+                : Wrapper64.BuildClientWithDeviceToken(deviceToken, hawkbitEndpoint, configRequest, deploymentAction, cancelAction);
+        }
+
+        public IntPtr BuildClientWithGatewayToken(string gatewayToken, string hawkbitEndpoint, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction)
+        {
+            return (IntPtr.Size == 4)
+                ? Wrapper32.BuildClientWithGatewayToken(gatewayToken, hawkbitEndpoint, configRequest, deploymentAction, cancelAction)
+                : Wrapper64.BuildClientWithGatewayToken(gatewayToken, hawkbitEndpoint, configRequest, deploymentAction, cancelAction);
+        }
+
+        public void Run(IntPtr client)
         {
             if (IntPtr.Size == 4)
             {
-                Wrapper32.RunClient(clientCertificate, provisioningEndpoint, xApigToken, onAuthErrorAction, configRequest, deploymentAction, cancelAction);
+                Wrapper32.Run(client);
             }
             else
             {
-                Wrapper64.RunClient(clientCertificate, provisioningEndpoint, xApigToken, onAuthErrorAction, configRequest, deploymentAction, cancelAction);
+                Wrapper64.Run(client);
             }
         }
 
-        public void RunClientWithDeviceToken(string deviceToken, string hawkbitEndpoint, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction)
+        public void Stop(IntPtr client)
         {
             if (IntPtr.Size == 4)
             {
-                Wrapper32.RunClientWithDeviceToken(deviceToken, hawkbitEndpoint, configRequest, deploymentAction, cancelAction);
+                Wrapper32.Stop(client);
             }
             else
             {
-                Wrapper64.RunClientWithDeviceToken(deviceToken, hawkbitEndpoint, configRequest, deploymentAction, cancelAction);
+                Wrapper64.Stop(client);
             }
         }
 
-        public void RunClientWithGatewayToken(string gatewayToken, string hawkbitEndpoint, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction)
+        public void Delete(IntPtr client)
         {
             if (IntPtr.Size == 4)
             {
-                Wrapper32.RunClientWithGatewayToken(gatewayToken, hawkbitEndpoint, configRequest, deploymentAction, cancelAction);
+                Wrapper32.Delete(client);
             }
             else
             {
-                Wrapper64.RunClientWithGatewayToken(gatewayToken, hawkbitEndpoint, configRequest, deploymentAction, cancelAction);
+                Wrapper64.Delete(client);
             }
         }
     }
@@ -75,13 +96,22 @@ namespace Up2dateDotNet
         public static extern void AddConfigAttribute(IntPtr responseBuilder, string key, string value);
 
         [DllImport(@"wrapperdll-x64.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void RunClient(string clientCertificate, string provisioningEndpoint, string xApigToken, AuthErrorActionFunc onAuthErrorAction, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
+        public static extern IntPtr BuildClient(string clientCertificate, string provisioningEndpoint, string xApigToken, AuthErrorActionFunc onAuthErrorAction, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
 
         [DllImport(@"wrapperdll-x64.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void RunClientWithDeviceToken(string deviceToken, string hawkbitEndpoint, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
+        public static extern IntPtr BuildClientWithDeviceToken(string deviceToken, string hawkbitEndpoint, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
 
         [DllImport(@"wrapperdll-x64.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void RunClientWithGatewayToken(string gatewayToken, string hawkbitEndpoint, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
+        public static extern IntPtr BuildClientWithGatewayToken(string gatewayToken, string hawkbitEndpoin, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
+
+        [DllImport(@"wrapperdll-x64.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void Run(IntPtr client);
+
+        [DllImport(@"wrapperdll-x64.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void Stop(IntPtr client);
+
+        [DllImport(@"wrapperdll-x64.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void Delete(IntPtr client);
     }
 
     static class Wrapper32
@@ -93,13 +123,22 @@ namespace Up2dateDotNet
         public static extern void AddConfigAttribute(IntPtr responseBuilder, string key, string value);
 
         [DllImport(@"wrapperdll-x86.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void RunClient(string clientCertificate, string provisioningEndpoint, string xApigToken, AuthErrorActionFunc onAuthErrorAction, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
+        public static extern IntPtr BuildClient(string clientCertificate, string provisioningEndpoint, string xApigToken, AuthErrorActionFunc onAuthErrorAction, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
 
         [DllImport(@"wrapperdll-x86.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void RunClientWithDeviceToken(string deviceToken, string hawkbitEndpoint, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
+        public static extern IntPtr BuildClientWithDeviceToken(string deviceToken, string hawkbitEndpoint, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
 
         [DllImport(@"wrapperdll-x86.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void RunClientWithGatewayToken(string gatewayToken, string hawkbitEndpoin, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
+        public static extern IntPtr BuildClientWithGatewayToken(string gatewayToken, string hawkbitEndpoin, ConfigRequestFunc configRequest, DeploymentActionFunc deploymentAction, CancelActionFunc cancelAction);
+
+        [DllImport(@"wrapperdll-x86.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void Run(IntPtr client);
+
+        [DllImport(@"wrapperdll-x86.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void Stop(IntPtr client);
+
+        [DllImport(@"wrapperdll-x86.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void Delete(IntPtr client);
     }
 
 }

@@ -13,20 +13,26 @@ namespace Up2dateDotNet
 
         void AddConfigAttribute(IntPtr responseBuilder, string key, string value);
 
-        void RunClient(string clientCertificate, string provisioningEndpoint, string xApigToken,
+        IntPtr BuildClient(string clientCertificate, string provisioningEndpoint, string xApigToken,
             AuthErrorActionFunc onAuthErrorAction,
             ConfigRequestFunc configRequest,
             DeploymentActionFunc deploymentAction,
             CancelActionFunc cancelAction);
 
-        void RunClientWithDeviceToken(string deviceToken, string hawkbitEndpoint,
+        IntPtr BuildClientWithDeviceToken(string deviceToken, string hawkbitEndpoint,
             ConfigRequestFunc configRequest,
             DeploymentActionFunc deploymentAction,
             CancelActionFunc cancelAction);
 
-        void RunClientWithGatewayToken(string gatewayToken, string hawkbitEndpoint,
+        IntPtr BuildClientWithGatewayToken(string gatewayToken, string hawkbitEndpoint,
             ConfigRequestFunc configRequest,
             DeploymentActionFunc deploymentAction,
             CancelActionFunc cancelAction);
+
+        void Run(IntPtr client);
+
+        void Stop(IntPtr client);
+
+        void Delete(IntPtr client);
     }
 }

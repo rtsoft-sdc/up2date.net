@@ -32,7 +32,9 @@ namespace ClientExample
 
         private static void RunClientWithDeviceToken(string hawkbitUrl, string controlledId, string token)
         {
-            wrapper.RunClientWithDeviceToken(token, hawkbitUrl + "/" + controlledId, onConfigRequest, onDeploymentAction, onCancelAction);
+            var client = wrapper.BuildClientWithDeviceToken(token, hawkbitUrl + "/" + controlledId, onConfigRequest, onDeploymentAction, onCancelAction);
+            wrapper.Run(client);
+            wrapper.Delete(client);
         }
 
         private static void RunClientWithCertificate(string provisioningUrl, string certFile)
@@ -41,7 +43,9 @@ namespace ClientExample
 
             var cert = File.ReadAllText(certFile);
 
-            wrapper.RunClient(cert, provisioningUrl, xApigToken, onAuthErrorAction, onConfigRequest, onDeploymentAction, onCancelAction);
+            var client = wrapper.BuildClient(cert, provisioningUrl, xApigToken, onAuthErrorAction, onConfigRequest, onDeploymentAction, onCancelAction);
+            wrapper.Run(client);
+            wrapper.Delete(client);
         }
 
         private static void onAuthErrorAction(string errorMessage)
