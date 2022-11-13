@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.ConstrainedExecution;
 using Up2dateDotNet;
 
 namespace ClientExample
@@ -13,8 +11,6 @@ namespace ClientExample
 
         static void Main(string[] args)
         {
-            var dispatcher = wrapper.CreateDispatcher(onConfigRequest, onDeploymentAction, onCancelAction);
-
             Console.WriteLine("Client started");
 
             if (args.Length < 1)
@@ -24,30 +20,28 @@ namespace ClientExample
             }
             else if (args.Length < 3)
             {
-                RunClientWithCertificate(dispatcher, args[0], args[1]);
+                RunClientWithCertificate(args[0], args[1]);
                 Console.WriteLine("Client stopped");
             }
             else
             {
-                RunClientWithDeviceToken(dispatcher, args[0], args[1], args[2], args[3]);
+                RunClientWithDeviceToken(args[0], args[1], args[2]);
                 Console.WriteLine("Client stopped");
             }
-
-            wrapper.DeleteDispatcher(dispatcher);
         }
 
-        private static void RunClientWithDeviceToken(IntPtr dispatcher, string hawkbitUrl, string tenant, string controlledId, string token)
+        private static void RunClientWithDeviceToken(string hawkbitUrl, string controlledId, string token)
         {
-            wrapper.RunClientWithDeviceToken(token, hawkbitUrl, controlledId, tenant, dispatcher);
+            wrapper.RunClientWithDeviceToken(token, hawkbitUrl + "/" + controlledId, onConfigRequest, onDeploymentAction, onCancelAction);
         }
 
-        private static void RunClientWithCertificate(IntPtr dispatcher, string provisioningUrl, string certFile)
+        private static void RunClientWithCertificate(string provisioningUrl, string certFile)
         {
             const string xApigToken = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
             var cert = File.ReadAllText(certFile);
 
-            wrapper.RunClient(cert, provisioningUrl, xApigToken, dispatcher, onAuthErrorAction);
+            wrapper.RunClient(cert, provisioningUrl, xApigToken, onAuthErrorAction, onConfigRequest, onDeploymentAction, onCancelAction);
         }
 
         private static void onAuthErrorAction(string errorMessage)
