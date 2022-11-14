@@ -16,7 +16,7 @@ namespace HkbClient {
         artifact->downloadTo(location + artifact->getFilename());
     }
 
-    Client* BuildClient(const char* clientCertificate, const char* provisioningEndpoint, const char* xApigToken,
+    void RunClient(const char* clientCertificate, const char* provisioningEndpoint, const char* xApigToken,
         AuthErrorCallbackFunction authErrorAction,
         ConfigRequestCallbackFunction configRequest,
         DeploymentActionCallbackFunction deploymentAction,
@@ -31,46 +31,44 @@ namespace HkbClient {
 
         auto builder = DDIClientBuilder::newInstance();
 
-        return builder->setAuthErrorHandler(authErrorHandler)
+        client = builder->setAuthErrorHandler(authErrorHandler)
             ->setEventHandler(std::shared_ptr<EventHandler>(new CallbackDispatcher(configRequest, deploymentAction, cancelAction)))
-            ->build().release();
-    }
+            ->build();
 
-    Client* BuildClientWithDeviceToken(const char* deviceToken, const char* hawkbitEndpoint,
-        ConfigRequestCallbackFunction configRequest,
-        DeploymentActionCallbackFunction deploymentAction,
-        CancelActionCallbackFunction cancelAction) {
-
-        auto builder = DDIClientBuilder::newInstance();
-
-        return builder->setHawkbitEndpoint(hawkbitEndpoint)
-            ->setDeviceToken(deviceToken)
-            ->setEventHandler(std::shared_ptr<EventHandler>(new CallbackDispatcher(configRequest, deploymentAction, cancelAction)))
-            ->build().release();
-    }
-
-    Client* BuildClientWithGatewayToken(const char* gatewayToken, const char* hawkbitEndpoint,
-        ConfigRequestCallbackFunction configRequest,
-        DeploymentActionCallbackFunction deploymentAction,
-        CancelActionCallbackFunction cancelAction) {
-
-        auto builder = DDIClientBuilder::newInstance();
-
-        return builder->setHawkbitEndpoint(hawkbitEndpoint)
-            ->setGatewayToken(gatewayToken)
-            ->setEventHandler(std::shared_ptr<EventHandler>(new CallbackDispatcher(configRequest, deploymentAction, cancelAction)))
-            ->build().release();
-    }
-
-    void Run(Client* client) {
         client->run();
     }
 
-    void Stop(Client* client) {
-        client->stop();
+    void RunClientWithDeviceToken(const char* deviceToken, const char* hawkbitEndpoint,
+        ConfigRequestCallbackFunction configRequest,
+        DeploymentActionCallbackFunction deploymentAction,
+        CancelActionCallbackFunction cancelAction) {
+
+        auto builder = DDIClientBuilder::newInstance();
+
+        client = builder->setHawkbitEndpoint(hawkbitEndpoint)
+            ->setDeviceToken(deviceToken)
+            ->setEventHandler(std::shared_ptr<EventHandler>(new CallbackDispatcher(configRequest, deploymentAction, cancelAction)))
+            ->build();
+
+        client->run();
     }
 
-    void Delete(Client* client) {
-        delete client;
+    void RunClientWithGatewayToken(const char* gatewayToken, const char* hawkbitEndpoint,
+        ConfigRequestCallbackFunction configRequest,
+        DeploymentActionCallbackFunction deploymentAction,
+        CancelActionCallbackFunction cancelAction) {
+
+        auto builder = DDIClientBuilder::newInstance();
+
+        client = builder->setHawkbitEndpoint(hawkbitEndpoint)
+            ->setGatewayToken(gatewayToken)
+            ->setEventHandler(std::shared_ptr<EventHandler>(new CallbackDispatcher(configRequest, deploymentAction, cancelAction)))
+            ->build();
+
+        client->run();
+    }
+
+    void StopClient() {
+        client->stop();
     }
 }
