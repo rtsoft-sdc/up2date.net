@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageId>rtsoft.ritms.up2date.net</PackageId>
+    <PackageId>up2date.net</PackageId>
     <Title>up2date.net</Title>
     <Authors>RTSoft GmbH</Authors>
     <Company>$(Authors)</Company>
