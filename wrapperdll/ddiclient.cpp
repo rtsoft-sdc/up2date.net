@@ -18,6 +18,7 @@ namespace HkbClient {
 
     void RunClient(const char* clientCertificate, const char* provisioningEndpoint, const char* xApigToken,
         AuthErrorCallbackFunction authErrorAction,
+        AuthSuccessCallbackFunction authSuccessAction,
         ConfigRequestCallbackFunction configRequest,
         DeploymentActionCallbackFunction deploymentAction,
         CancelActionCallbackFunction cancelAction) {
@@ -27,7 +28,7 @@ namespace HkbClient {
             ->addHeader("X-Apig-AppCode", std::string(xApigToken))
             ->build();
 
-        auto authErrorHandler = std::shared_ptr<AuthErrorHandler>(new DPSInfoReloadHandler(std::move(dpsClient), authErrorAction));
+        auto authErrorHandler = std::shared_ptr<AuthErrorHandler>(new DPSInfoReloadHandler(std::move(dpsClient), authErrorAction, authSuccessAction));
 
         auto builder = DDIClientBuilder::newInstance();
 

@@ -13,10 +13,12 @@ namespace HkbClient {
     class DPSInfoReloadHandler : public AuthErrorHandler {
         std::unique_ptr<ProvisioningClient> client;
         AuthErrorCallbackFunction authErrorAction;
+        AuthSuccessCallbackFunction authSuccessAction;
 
     public:
-        explicit DPSInfoReloadHandler(std::unique_ptr<ProvisioningClient> client_, AuthErrorCallbackFunction authErrorAction_) : client(std::move(client_)) {
+        explicit DPSInfoReloadHandler(std::unique_ptr<ProvisioningClient> client_, AuthErrorCallbackFunction authErrorAction_, AuthSuccessCallbackFunction authSuccessAction_) : client(std::move(client_)) {
             authErrorAction = authErrorAction_;
+            authSuccessAction = authSuccessAction_;
         };
 
         void onAuthError(std::unique_ptr<AuthRestoreHandler> ptr) override {
@@ -29,10 +31,11 @@ namespace HkbClient {
                     auto keyPair = payload->getKeyPair();
                     std::cout << "|DPSInfoReloadHandler| Setting TLS ..." << std::endl;
                     ptr->setTLS(keyPair->getCrt(), keyPair->getKey());
-                    std::cout << "|DPSInfoReloadHandler| Setting endpoint [" << payload->getUp2DateEndpoint() << "] ..." << std::endl;
-                    ptr->setEndpoint(payload->getUp2DateEndpoint());
+                    auto endpoint = payload->getUp2DateEndpoint();
+                    std::cout << "|DPSInfoReloadHandler| Setting endpoint [" << endpoint << "] ..." << std::endl;
+                    ptr->setEndpoint(endpoint);
                     std::cout << "==============================================" << std::endl;
-                    authErrorAction("");
+                    authSuccessAction(endpoint.c_str());
                     return;
                 }
                 catch (std::exception &e) {
