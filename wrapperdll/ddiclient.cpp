@@ -71,4 +71,8 @@ namespace HkbClient {
     void StopClient() {
         client->stop();
     }
+
+    void RequestToPoll() {
+        client->requestToPoll();
+    }
 }

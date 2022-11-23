@@ -30,5 +30,7 @@ namespace Up2dateDotNet
             CancelActionFunc cancelAction);
 
         void StopClient();
+
+        void RequestToPoll();
     }
 }

@@ -28,5 +28,6 @@ namespace HkbClient {
 			DeploymentActionCallbackFunction deploymentAction,
 			CancelActionCallbackFunction cancelAction);
 		WDLL_EXPORT void StopClient();
+		WDLL_EXPORT void RequestToPoll();
 	}
 }
