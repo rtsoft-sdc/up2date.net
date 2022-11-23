@@ -7,8 +7,8 @@
 
 namespace HkbClient {
 
-    typedef bool (__stdcall *AuthErrorCallbackFunction)(const char* errorMessage);
-	typedef bool (__stdcall *AuthSuccessCallbackFunction)(const char* up2DateEndpoint);
+    typedef bool (__stdcall *ProvErrorCallbackFunction)(const char* errorMessage);
+	typedef bool (__stdcall *ProvSuccessCallbackFunction)(const char* up2DateEndpoint);
 
 	static std::unique_ptr<Client> client;
 
@@ -16,8 +16,8 @@ namespace HkbClient {
 		WDLL_EXPORT void AddConfigAttribute(ddi::ConfigResponseBuilder* responseBuilder, const char* key, const char* value);
 		WDLL_EXPORT void DownloadArtifact(ddi::Artifact* artifact, const char* location);
 		WDLL_EXPORT void RunClient(const char* clientCertificate, const char* provisioningEndpoint, const char* xApigToken,
-			AuthErrorCallbackFunction authErrorAction,
-			AuthSuccessCallbackFunction authSuccessAction,
+			ProvErrorCallbackFunction provErrorAction,
+			ProvSuccessCallbackFunction provSuccessAction,
 			ConfigRequestCallbackFunction configRequest,
 			DeploymentActionCallbackFunction deploymentAction,
 			CancelActionCallbackFunction cancelAction);

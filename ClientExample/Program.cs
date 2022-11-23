@@ -41,17 +41,17 @@ namespace ClientExample
 
             var cert = File.ReadAllText(certFile);
 
-            wrapper.RunClient(cert, provisioningUrl, xApigToken, onAuthErrorAction, onAuthSuccessAction, onConfigRequest, onDeploymentAction, onCancelAction);
+            wrapper.RunClient(cert, provisioningUrl, xApigToken, onProvErrorAction, onProvSuccessAction, onConfigRequest, onDeploymentAction, onCancelAction);
         }
 
-        private static void onAuthErrorAction(string errorMessage)
+        private static void onProvErrorAction(string errorMessage)
         {
-            Console.WriteLine($"AuthErrorAction: errorMessage = {errorMessage}");
+            Console.WriteLine($"ProvErrorAction: errorMessage = {errorMessage}");
         }
 
-        private static void onAuthSuccessAction(string up2DateEndpoint)
+        private static void onProvSuccessAction(string up2DateEndpoint)
         {
-            Console.WriteLine($"AuthSuccessAction: up2DateEndpoint = {up2DateEndpoint}");
+            Console.WriteLine($"ProvSuccessAction: up2DateEndpoint = {up2DateEndpoint}");
         }
 
         private static bool onCancelAction(int actionId)
