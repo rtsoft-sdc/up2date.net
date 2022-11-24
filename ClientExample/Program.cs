@@ -66,26 +66,26 @@ namespace ClientExample
                 {
                     const string xApigToken = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
                     var cert = File.ReadAllText(certFile);
-                    wrapper.RunClient(cert, provisioningUrl, xApigToken, onAuthErrorAction, onAuthSuccessAction, onConfigRequest, onDeploymentAction, onCancelAction);
+                    wrapper.RunClient(cert, provisioningUrl, xApigToken, onProvErrorAction, onProvSuccessAction, onConfigRequest, onDeploymentAction, onCancelAction);
                     Console.WriteLine("\nClient restarted");
                     Console.Write(prompt);
                 }
             });
         }
 
-        private static void onAuthErrorAction(string errorMessage)
+        private static void onProvErrorAction(string errorMessage)
         {
-            Console.WriteLine($"\nProvisioningErrorAction: errorMessage = {errorMessage}");
-            Console.Write(prompt);
+            Console.WriteLine($"ProvisioningErrorAction: errorMessage = {errorMessage}");
         }
 
-        private static void onAuthSuccessAction(string up2DateEndpoint)
+        private static void onProvSuccessAction(string up2DateEndpoint)
+        {
         {
             Console.WriteLine($"\nProvisioningSuccessAction: up2DateEndpoint = {up2DateEndpoint}");
-            Console.Write(prompt);
         }
 
         private static bool onCancelAction(int actionId)
+        {
         {
             Console.WriteLine($"\nCancelAction: actionId = {actionId}");
             Console.Write(prompt);
