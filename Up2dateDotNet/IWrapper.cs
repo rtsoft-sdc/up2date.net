@@ -5,7 +5,8 @@ namespace Up2dateDotNet
     public delegate void ConfigRequestFunc(IntPtr responseBuilder);
     public delegate void DeploymentActionFunc(IntPtr artifact, DeploymentInfo info, out ClientResult result);
     public delegate bool CancelActionFunc(int stopId);
-    public delegate void AuthErrorActionFunc(string errorMessage);
+    public delegate void ProvErrorCallbackFunc(string errorMessage);
+    public delegate void ProvSuccessCallbackFunc(string up2DateEndpoint);
 
     public interface IWrapper
     {
@@ -14,7 +15,8 @@ namespace Up2dateDotNet
         void AddConfigAttribute(IntPtr responseBuilder, string key, string value);
 
         void RunClient(string clientCertificate, string provisioningEndpoint, string xApigToken,
-            AuthErrorActionFunc onAuthErrorAction,
+            ProvErrorCallbackFunc onProvErrorAction,
+            ProvSuccessCallbackFunc onProvSuccessAction,
             ConfigRequestFunc configRequest,
             DeploymentActionFunc deploymentAction,
             CancelActionFunc cancelAction);

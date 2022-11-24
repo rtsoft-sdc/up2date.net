@@ -32,9 +32,7 @@ namespace ClientExample
 
         private static void RunClientWithDeviceToken(string hawkbitUrl, string controlledId, string token)
         {
-            var client = wrapper.BuildClientWithDeviceToken(token, hawkbitUrl + "/" + controlledId, onConfigRequest, onDeploymentAction, onCancelAction);
-            wrapper.Run(client);
-            wrapper.Delete(client);
+            wrapper.RunClientWithDeviceToken(token, hawkbitUrl + "/" + controlledId, onConfigRequest, onDeploymentAction, onCancelAction);
         }
 
         private static void RunClientWithCertificate(string provisioningUrl, string certFile)
@@ -43,14 +41,17 @@ namespace ClientExample
 
             var cert = File.ReadAllText(certFile);
 
-            var client = wrapper.BuildClient(cert, provisioningUrl, xApigToken, onAuthErrorAction, onConfigRequest, onDeploymentAction, onCancelAction);
-            wrapper.Run(client);
-            wrapper.Delete(client);
+            wrapper.RunClient(cert, provisioningUrl, xApigToken, onProvErrorAction, onProvSuccessAction, onConfigRequest, onDeploymentAction, onCancelAction);
         }
 
-        private static void onAuthErrorAction(string errorMessage)
+        private static void onProvErrorAction(string errorMessage)
         {
-            Console.WriteLine($"AuthErrorAction: errorMessage = {errorMessage}");
+            Console.WriteLine($"ProvErrorAction: errorMessage = {errorMessage}");
+        }
+
+        private static void onProvSuccessAction(string up2DateEndpoint)
+        {
+            Console.WriteLine($"ProvSuccessAction: up2DateEndpoint = {up2DateEndpoint}");
         }
 
         private static bool onCancelAction(int actionId)
