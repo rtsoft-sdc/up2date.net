@@ -76,6 +76,18 @@ namespace Up2dateDotNet
                 Wrapper64.StopClient();
             }
         }
+
+        public void RequestToPoll()
+        {
+            if (IntPtr.Size == 4)
+            {
+                Wrapper32.RequestToPoll();
+            }
+            else
+            {
+                Wrapper64.RequestToPoll();
+            }
+        }
     }
 
     static class Wrapper64
@@ -97,6 +109,9 @@ namespace Up2dateDotNet
 
         [DllImport(@"wrapperdll-x64.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void StopClient();
+
+        [DllImport(@"wrapperdll-x64.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RequestToPoll();
     }
 
     static class Wrapper32
@@ -118,6 +133,9 @@ namespace Up2dateDotNet
 
         [DllImport(@"wrapperdll-x86.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void StopClient();
+
+        [DllImport(@"wrapperdll-x86.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void RequestToPoll();
     }
 
 }
