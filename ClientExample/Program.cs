@@ -53,7 +53,6 @@ namespace ClientExample
                 {
                     wrapper.RunClientWithDeviceToken(token, hawkbitUrl + "/" + controlledId, onConfigRequest, onDeploymentAction, onCancelAction);
                     Console.WriteLine("\nClient restarted");
-                    Console.Write(prompt);
                 }
             });
         }
@@ -68,7 +67,6 @@ namespace ClientExample
                     var cert = File.ReadAllText(certFile);
                     wrapper.RunClient(cert, provisioningUrl, xApigToken, onProvErrorAction, onProvSuccessAction, onConfigRequest, onDeploymentAction, onCancelAction);
                     Console.WriteLine("\nClient restarted");
-                    Console.Write(prompt);
                 }
             });
         }
@@ -80,15 +78,12 @@ namespace ClientExample
 
         private static void onProvSuccessAction(string up2DateEndpoint)
         {
-        {
             Console.WriteLine($"\nProvisioningSuccessAction: up2DateEndpoint = {up2DateEndpoint}");
         }
 
         private static bool onCancelAction(int actionId)
         {
-        {
             Console.WriteLine($"\nCancelAction: actionId = {actionId}");
-            Console.Write(prompt);
             return true;
         }
 
@@ -99,7 +94,6 @@ namespace ClientExample
             Console.WriteLine($"    updateType = {info.updateType}");
             Console.WriteLine($"    isInMaintenanceWindow = {info.isInMaintenanceWindow}");
             Console.WriteLine($"    artifactFileName = {info.artifactFileName}");
-            Console.Write(prompt);
             result = new ClientResult { Execution = Execution.CLOSED, Finished = Finished.SUCCESS, Message = string.Empty };
         }
 
@@ -108,8 +102,6 @@ namespace ClientExample
             Console.WriteLine($"\nConfigRequest");
             wrapper.AddConfigAttribute(responseBuilder, "Example.key1", "Example.value1");
             wrapper.AddConfigAttribute(responseBuilder, "Example.key2", "Example.value2");
-            Console.Write(prompt);
         }
-
     }
 }
