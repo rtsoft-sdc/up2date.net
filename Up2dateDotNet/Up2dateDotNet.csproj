@@ -15,9 +15,9 @@
     <PackageTags>RITMS;UP2DATE</PackageTags>
     <PackageReleaseNotes>First public release.</PackageReleaseNotes>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <AssemblyVersion>2.1.0.0</AssemblyVersion>
-    <FileVersion>2.1.0.0</FileVersion>
-    <Version>2.1.0.0</Version>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <FileVersion>2.2.0.0</FileVersion>
+    <Version>2.2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
