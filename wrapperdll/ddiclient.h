@@ -20,15 +20,18 @@ namespace HkbClient {
 			ProvSuccessCallbackFunction provSuccessAction,
 			ConfigRequestCallbackFunction configRequest,
 			DeploymentActionCallbackFunction deploymentAction,
-			CancelActionCallbackFunction cancelAction);
+			CancelActionCallbackFunction cancelAction,
+			NoActionCallbackFunction noAction);
 		WDLL_EXPORT void RunClientWithDeviceToken(const char* deviceToken, const char* hawkbitEndpoint,
 			ConfigRequestCallbackFunction configRequest,
 			DeploymentActionCallbackFunction deploymentAction,
-			CancelActionCallbackFunction cancelAction);
+			CancelActionCallbackFunction cancelAction,
+			NoActionCallbackFunction noAction);
 		WDLL_EXPORT void RunClientWithGatewayToken(const char* gatewayToken, const char* hawkbitEndpoint,
 			ConfigRequestCallbackFunction configRequest,
 			DeploymentActionCallbackFunction deploymentAction,
-			CancelActionCallbackFunction cancelAction);
+			CancelActionCallbackFunction cancelAction,
+			NoActionCallbackFunction noAction);
 		WDLL_EXPORT void StopClient();
 		WDLL_EXPORT void RequestToPoll();
 	}
