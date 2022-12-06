@@ -28,6 +28,7 @@ namespace HkbClient {
                     auto keyPair = payload->getKeyPair();
                     ptr->setTLS(keyPair->getCrt(), keyPair->getKey());
                     auto endpoint = payload->getUp2DateEndpoint();
+                    std::cout << "|DPSInfoReloadHandler| Setting endpoint [" << endpoint << "] ..." << std::endl;
                     ptr->setEndpoint(endpoint);
                     provSuccessAction(endpoint.c_str());
                     return;

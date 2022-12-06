@@ -51,7 +51,7 @@ namespace ClientExample
             {
                 while (true)
                 {
-                    wrapper.RunClientWithDeviceToken(token, hawkbitUrl + "/" + controlledId, onConfigRequest, onDeploymentAction, onCancelAction);
+                    wrapper.RunClientWithDeviceToken(token, hawkbitUrl + "/" + controlledId, onConfigRequest, onDeploymentAction, onCancelAction, onNoAction);
                     Console.WriteLine("\nClient restarted");
                 }
             });
@@ -65,7 +65,7 @@ namespace ClientExample
                 {
                     const string xApigToken = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
                     var cert = File.ReadAllText(certFile);
-                    wrapper.RunClient(cert, provisioningUrl, xApigToken, onProvErrorAction, onProvSuccessAction, onConfigRequest, onDeploymentAction, onCancelAction);
+                    wrapper.RunClient(cert, provisioningUrl, xApigToken, onProvErrorAction, onProvSuccessAction, onConfigRequest, onDeploymentAction, onCancelAction, onNoAction);
                     Console.WriteLine("\nClient restarted");
                 }
             });
@@ -85,6 +85,11 @@ namespace ClientExample
         {
             Console.WriteLine($"\nCancelAction: actionId = {actionId}");
             return true;
+        }
+
+        private static void onNoAction()
+        {
+            Console.WriteLine("\nNoAction");
         }
 
         private static void onDeploymentAction(IntPtr artifact, DeploymentInfo info, out ClientResult result)

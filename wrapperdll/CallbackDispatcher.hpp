@@ -46,9 +46,10 @@ namespace HkbClient {
         const char* message;
     } ClientResult;
 
-    typedef void (__stdcall *ConfigRequestCallbackFunction)(ddi::ConfigResponseBuilder* responseBuilder);
-    typedef void (__stdcall *DeploymentActionCallbackFunction)(ddi::Artifact* artifact, _DEPLOYMENTINFO info, ClientResult& result);
-    typedef bool (__stdcall *CancelActionCallbackFunction)(int stopId);
+    typedef void(__stdcall* ConfigRequestCallbackFunction)(ddi::ConfigResponseBuilder* responseBuilder);
+    typedef void(__stdcall* DeploymentActionCallbackFunction)(ddi::Artifact* artifact, _DEPLOYMENTINFO info, ClientResult& result);
+    typedef bool(__stdcall* CancelActionCallbackFunction)(int stopId);
+    typedef bool(__stdcall* NoActionCallbackFunction)();
 
     typedef struct 
     {
@@ -102,10 +103,11 @@ namespace HkbClient {
 
         ~CallbackDispatcher() = default;
 
-        CallbackDispatcher(ConfigRequestCallbackFunction _configRequest, DeploymentActionCallbackFunction _deploymentAction, CancelActionCallbackFunction _cancelAction) {
+        CallbackDispatcher(ConfigRequestCallbackFunction _configRequest, DeploymentActionCallbackFunction _deploymentAction, CancelActionCallbackFunction _cancelAction, NoActionCallbackFunction _noAction) {
             configRequest = _configRequest;
             deploymentAction = _deploymentAction;
             cancelAction = _cancelAction;
+            noAction = _noAction;
         };
 
     private:
@@ -115,6 +117,7 @@ namespace HkbClient {
         ConfigRequestCallbackFunction configRequest;
         DeploymentActionCallbackFunction deploymentAction;
         CancelActionCallbackFunction cancelAction;
+        NoActionCallbackFunction noAction;
         std::vector<KEYVALUEPAIR> configInfo;
         std::string downloadLocation;
     };
