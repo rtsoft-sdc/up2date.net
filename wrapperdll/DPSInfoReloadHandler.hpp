@@ -24,12 +24,17 @@ namespace HkbClient {
         void onAuthError(std::unique_ptr<AuthRestoreHandler> ptr) override {
             for (;;) {
                 try {
+                    std::cout << "==============================================" << std::endl;
+                    std::cout << "|DPSInfoReloadHandler| Starting provisioning..." << std::endl;
                     auto payload = client->doProvisioning();
+                    std::cout << "|DPSInfoReloadHandler|     ... done" << std::endl;
                     auto keyPair = payload->getKeyPair();
+                    std::cout << "|DPSInfoReloadHandler| Setting TLS ..." << std::endl;
                     ptr->setTLS(keyPair->getCrt(), keyPair->getKey());
                     auto endpoint = payload->getUp2DateEndpoint();
                     std::cout << "|DPSInfoReloadHandler| Setting endpoint [" << endpoint << "] ..." << std::endl;
                     ptr->setEndpoint(endpoint);
+                    std::cout << "==============================================" << std::endl;
                     provSuccessAction(endpoint.c_str());
                     return;
                 }
