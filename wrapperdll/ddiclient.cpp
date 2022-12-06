@@ -21,7 +21,8 @@ namespace HkbClient {
         ProvSuccessCallbackFunction provSuccessAction,
         ConfigRequestCallbackFunction configRequest,
         DeploymentActionCallbackFunction deploymentAction,
-        CancelActionCallbackFunction cancelAction) {
+        CancelActionCallbackFunction cancelAction,
+        NoActionCallbackFunction noAction) {
         auto dpsBuilder = CloudProvisioningClientBuilder::newInstance();
         auto dpsClient = dpsBuilder->setEndpoint(provisioningEndpoint)
             ->setAuthCrt(clientCertificate)
@@ -33,7 +34,7 @@ namespace HkbClient {
         auto builder = DDIClientBuilder::newInstance();
 
         client = builder->setAuthErrorHandler(authErrorHandler)
-            ->setEventHandler(std::shared_ptr<EventHandler>(new CallbackDispatcher(configRequest, deploymentAction, cancelAction)))
+            ->setEventHandler(std::shared_ptr<EventHandler>(new CallbackDispatcher(configRequest, deploymentAction, cancelAction, noAction)))
             ->build();
 
         client->run();
@@ -42,13 +43,14 @@ namespace HkbClient {
     void RunClientWithDeviceToken(const char* deviceToken, const char* hawkbitEndpoint,
         ConfigRequestCallbackFunction configRequest,
         DeploymentActionCallbackFunction deploymentAction,
-        CancelActionCallbackFunction cancelAction) {
+        CancelActionCallbackFunction cancelAction,
+        NoActionCallbackFunction noAction) {
 
         auto builder = DDIClientBuilder::newInstance();
 
         client = builder->setHawkbitEndpoint(hawkbitEndpoint)
             ->setDeviceToken(deviceToken)
-            ->setEventHandler(std::shared_ptr<EventHandler>(new CallbackDispatcher(configRequest, deploymentAction, cancelAction)))
+            ->setEventHandler(std::shared_ptr<EventHandler>(new CallbackDispatcher(configRequest, deploymentAction, cancelAction, noAction)))
             ->build();
 
         client->run();
@@ -57,13 +59,14 @@ namespace HkbClient {
     void RunClientWithGatewayToken(const char* gatewayToken, const char* hawkbitEndpoint,
         ConfigRequestCallbackFunction configRequest,
         DeploymentActionCallbackFunction deploymentAction,
-        CancelActionCallbackFunction cancelAction) {
+        CancelActionCallbackFunction cancelAction,
+        NoActionCallbackFunction noAction) {
 
         auto builder = DDIClientBuilder::newInstance();
 
         client = builder->setHawkbitEndpoint(hawkbitEndpoint)
             ->setGatewayToken(gatewayToken)
-            ->setEventHandler(std::shared_ptr<EventHandler>(new CallbackDispatcher(configRequest, deploymentAction, cancelAction)))
+            ->setEventHandler(std::shared_ptr<EventHandler>(new CallbackDispatcher(configRequest, deploymentAction, cancelAction, noAction)))
             ->build();
 
         client->run();

@@ -95,6 +95,7 @@ namespace HkbClient {
     }
 
     void CallbackDispatcher::onNoActions() {
+        noAction();
     }
 
     void CallbackDispatcher::DeployArtifact(const std::shared_ptr<::Artifact> artifact, DEPLOYMENTINFO info, ClientResult& result )
